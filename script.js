@@ -16,3 +16,5 @@ alert(
     fullPrice +
     " руб."
 );
+
+console.log("Купите, не пожалеете! PS: " + adaptive + ".");
