@@ -4,7 +4,7 @@ let title = "Проект: Зоомагазин Ёж";
 let screens = "Простые, Сложные, Интерактивные";
 let screenPrice = 500;
 const rollback = 50;
-const fullPrice = 1000;
+let fullPrice = 1000;
 let adaptive = true;
 
 alert(
@@ -29,10 +29,35 @@ screens = prompt(
   "Какие типы экранов нужно разработать?",
   "Простые, Сложные, Интерактивные"
 );
-screenPrice = parseFloat(
-  prompt("Сколько будет стоить данная работа?").replace(",", `.`)
-);
-
+screenPrice = parseFloat(prompt("Сколько будет стоить данная работа?"));
 adaptive = confirm("Нужен ли адаптив на сайте?");
 
-console.log(adaptive);
+const service1 = prompt(
+  "Какой дополнительный тип услуги нужен?",
+  "Доп услугп не нужна"
+);
+const servicePrice1 = parseFloat(prompt("Сколько это будет стоить?", "0"));
+const service2 = prompt(
+  "Какой дополнительный тип услуги нужен?",
+  "Доп услугп не нужна"
+);
+const servicePrice2 = parseFloat(prompt("Сколько это будет стоить?", "0"));
+
+fullPrice = screenPrice + servicePrice1 + servicePrice2;
+const servicePercentPrice = Math.ceil(fullPrice - rollback);
+
+console.log(servicePercentPrice);
+
+switch (true) {
+  case fullPrice > 30000:
+    console.log("Даем скидку в 10%");
+    break;
+  case fullPrice > 15000 && fullPrice <= 30000:
+    console.log("Даем скидку в 5%");
+    break;
+  case fullPrice <= 15000 && fullPrice > 0:
+    console.log("Скидка не предусмотрена");
+    break;
+  default:
+    console.log("Что то пошло не так");
+}
