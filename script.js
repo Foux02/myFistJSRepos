@@ -1,3 +1,5 @@
+"use strict";
+
 const title = "Проект: Зоомагазин Ёж";
 let screens = "Простые, Сложные, Интерактивные";
 const screenPrice = 500;
