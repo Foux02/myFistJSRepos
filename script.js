@@ -29,19 +29,38 @@ screens = prompt(
   "Какие типы экранов нужно разработать?",
   "Простые, Сложные, Интерактивные"
 );
-screenPrice = parseFloat(prompt("Сколько будет стоить данная работа?"));
-adaptive = confirm("Нужен ли адаптив на сайте?");
 
-const service1 = prompt(
-  "Какой дополнительный тип услуги нужен?",
-  "Доп услугп не нужна"
-);
-const servicePrice1 = parseFloat(prompt("Сколько это будет стоить?", "0"));
-const service2 = prompt(
-  "Какой дополнительный тип услуги нужен?",
-  "Доп услугп не нужна"
-);
-const servicePrice2 = parseFloat(prompt("Сколько это будет стоить?", "0"));
+screenPrice = prompt("Сколько будет стоить данная работа?");
+if (screenPrice == null) {
+  screenPrice = 0;
+} else if (screenPrice == "") {
+  screenPrice = 0;
+} else {
+  screenPrice = parseFloat(screenPrice.replace(",", `.`));
+}
+
+adaptive = confirm("Нужен ли адаптив на сайте?");
+const service1 = prompt("Какой дополнительный тип услуги нужен?");
+
+let servicePrice1 = prompt("Сколько это будет стоить?");
+if (servicePrice1 == null) {
+  servicePrice1 = 0;
+} else if (servicePrice1 == "") {
+  servicePrice1 = 0;
+} else {
+  servicePrice1 = parseFloat(servicePrice1.replace(",", `.`));
+}
+
+const service2 = prompt("Какой дополнительный тип услуги нужен?");
+
+let servicePrice2 = prompt("Сколько это будет стоить?");
+if (servicePrice2 == null) {
+  servicePrice2 = 0;
+} else if (servicePrice2 == "") {
+  servicePrice2 = 0;
+} else {
+  servicePrice2 = parseFloat(servicePrice2.replace(",", `.`));
+}
 
 fullPrice = screenPrice + servicePrice1 + servicePrice2;
 const servicePercentPrice = Math.ceil(fullPrice - rollback);
