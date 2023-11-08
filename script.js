@@ -1,36 +1,12 @@
 "use strict";
 
-let title = "Проект: Зоомагазин Ёж";
-let screens = "Простые, Сложные, Интерактивные";
-let screenPrice = 500;
-const rollback = 50;
-let fullPrice = 1000;
-let adaptive = true;
-
-alert(
-  `Представляем вашему вниманию ${title}. C форматом экрана ${screens}. По скромной цене: ${fullPrice} руб.`
-);
-
-console.log(`Купите, не пожалеете! PS: ${adaptive}.`);
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
-console.log(screens.length);
-console.log(`Стоимость верстки экранов: ${screenPrice} долларов.`);
-console.log(`Стоимость разработки сайта: ${fullPrice} долларов.`);
-
-console.log(screens.toLowerCase().split(", "));
-console.log(fullPrice * (rollback / 100));
-
-//Урок №3
-
-title = prompt("Как называется ваш проект?");
-screens = prompt(
+let title = prompt("Как называется ваш проект?");
+let screens = prompt(
   "Какие типы экранов нужно разработать?",
   "Простые, Сложные, Интерактивные"
 );
 
-screenPrice = prompt("Сколько будет стоить данная работа?");
+let screenPrice = prompt("Сколько будет стоить данная работа?");
 if (screenPrice == null) {
   screenPrice = 0;
 } else if (screenPrice == "") {
@@ -39,7 +15,8 @@ if (screenPrice == null) {
   screenPrice = parseFloat(screenPrice.replace(",", `.`));
 }
 
-adaptive = confirm("Нужен ли адаптив на сайте?");
+const rollback = 50;
+let adaptive = confirm("Нужен ли адаптив на сайте?");
 const service1 = prompt("Какой дополнительный тип услуги нужен?");
 
 let servicePrice1 = prompt("Сколько это будет стоить?");
@@ -62,10 +39,12 @@ if (servicePrice2 == null) {
   servicePrice2 = parseFloat(servicePrice2.replace(",", `.`));
 }
 
-fullPrice = screenPrice + servicePrice1 + servicePrice2;
+let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 const servicePercentPrice = Math.ceil(fullPrice - rollback);
 
-console.log(servicePercentPrice);
+alert(
+  `Название проекта: ${title}. Тип экранов: ${screens}. Стоимость работ: ${fullPrice} руб.`
+);
 
 switch (true) {
   case fullPrice > 30000:
@@ -80,3 +59,14 @@ switch (true) {
   default:
     console.log("Что то пошло не так");
 }
+
+console.log(`Адаптив на сайте: ${adaptive}.`);
+console.log(typeof title);
+console.log(typeof fullPrice);
+console.log(typeof adaptive);
+console.log(screens.length);
+console.log(`Стоимость верстки экранов: ${screenPrice} долларов.`);
+console.log(`Стоимость разработки сайта: ${fullPrice} долларов.`);
+console.log(screens.toLowerCase().split(", "));
+console.log(fullPrice * (rollback / 100));
+console.log(servicePercentPrice);
