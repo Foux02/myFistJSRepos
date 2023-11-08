@@ -13,7 +13,23 @@ let service1 = prompt("Какой дополнительный тип услуг
 let servicePrice1 = prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice2 = prompt("Сколько это будет стоить?");
-let fullPrice, servicePercentPrice;
+let fullPrice, servicePercentPrice, allServicePrices;
+
+// function expression
+
+const getAllServicePrices = function (funServicePrice1, funServicePrice2) {
+  return funServicePrice1 + funServicePrice2;
+};
+
+// function declaration -
+
+function getFullPrice(funScreenPrice, funAllServicePrices) {
+  return funScreenPrice + funAllServicePrices;
+}
+
+const getTitle = function (funTitle) {
+  return funTitle[0].toUpperCase() + funTitle.slice(1);
+};
 
 if (screenPrice == null) {
   screenPrice = 0;
@@ -39,7 +55,9 @@ if (servicePrice2 == null) {
   servicePrice2 = parseFloat(servicePrice2.replace(",", `.`));
 }
 
-fullPrice = screenPrice + servicePrice1 + servicePrice2;
+title = getTitle(title);
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
 servicePercentPrice = Math.ceil(fullPrice - rollback);
 
 switch (true) {
@@ -56,6 +74,7 @@ switch (true) {
     console.log("Что то пошло не так");
 }
 
+console.log(title[0]); // проверка на пустоту
 console.log(`Адаптив на сайте: ${adaptive}.`);
 console.log(typeof title);
 console.log(typeof fullPrice);
