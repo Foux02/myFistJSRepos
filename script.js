@@ -1,12 +1,20 @@
 "use strict";
 
+const rollback = 50;
+
 let title = prompt("Как называется ваш проект?");
 let screens = prompt(
   "Какие типы экранов нужно разработать?",
   "Простые, Сложные, Интерактивные"
 );
-
 let screenPrice = prompt("Сколько будет стоить данная работа?");
+let adaptive = confirm("Нужен ли адаптив на сайте?");
+let service1 = prompt("Какой дополнительный тип услуги нужен?");
+let servicePrice1 = prompt("Сколько это будет стоить?");
+let service2 = prompt("Какой дополнительный тип услуги нужен?");
+let servicePrice2 = prompt("Сколько это будет стоить?");
+let fullPrice, servicePercentPrice;
+
 if (screenPrice == null) {
   screenPrice = 0;
 } else if (screenPrice == "") {
@@ -15,11 +23,6 @@ if (screenPrice == null) {
   screenPrice = parseFloat(screenPrice.replace(",", `.`));
 }
 
-const rollback = 50;
-let adaptive = confirm("Нужен ли адаптив на сайте?");
-const service1 = prompt("Какой дополнительный тип услуги нужен?");
-
-let servicePrice1 = prompt("Сколько это будет стоить?");
 if (servicePrice1 == null) {
   servicePrice1 = 0;
 } else if (servicePrice1 == "") {
@@ -28,9 +31,6 @@ if (servicePrice1 == null) {
   servicePrice1 = parseFloat(servicePrice1.replace(",", `.`));
 }
 
-const service2 = prompt("Какой дополнительный тип услуги нужен?");
-
-let servicePrice2 = prompt("Сколько это будет стоить?");
 if (servicePrice2 == null) {
   servicePrice2 = 0;
 } else if (servicePrice2 == "") {
@@ -39,12 +39,8 @@ if (servicePrice2 == null) {
   servicePrice2 = parseFloat(servicePrice2.replace(",", `.`));
 }
 
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-const servicePercentPrice = Math.ceil(fullPrice - rollback);
-
-alert(
-  `Название проекта: ${title}. Тип экранов: ${screens}. Стоимость работ: ${fullPrice} руб.`
-);
+fullPrice = screenPrice + servicePrice1 + servicePrice2;
+servicePercentPrice = Math.ceil(fullPrice - rollback);
 
 switch (true) {
   case fullPrice > 30000:
@@ -70,3 +66,7 @@ console.log(`Стоимость разработки сайта: ${fullPrice} д
 console.log(screens.toLowerCase().split(", "));
 console.log(fullPrice * (rollback / 100));
 console.log(servicePercentPrice);
+
+alert(
+  `Название проекта: ${title}. Тип экранов: ${screens}. Стоимость работ: ${fullPrice} долларов.`
+);
