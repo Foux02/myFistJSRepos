@@ -31,10 +31,18 @@ const getTitle = function (funTitle, symbolEmpty1, symbolEmpty2) {
   return funTitle[symbolEmpty1].toUpperCase() + funTitle.slice(symbolEmpty2);
 };
 
-if (title[0] == " ") {
-  title = getTitle(title, 1, 2);
-} else {
+const getServicePercentPrices = function (funFullPrice, funRollback) {
+  return funFullPrice - funRollback;
+};
+
+const showTypeOf = function (varTypeOf) {
+  console.log(varTypeOf, typeof varTypeOf);
+};
+
+if (title[0] !== " ") {
   title = getTitle(title, 0, 1);
+} else {
+  title = getTitle(title, 1, 2);
 }
 
 if (screenPrice == null) {
@@ -63,34 +71,24 @@ if (servicePrice2 == null) {
 
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 fullPrice = getFullPrice(screenPrice, allServicePrices);
-servicePercentPrice = Math.ceil(fullPrice - rollback);
+servicePercentPrice = Math.ceil(getServicePercentPrices(fullPrice, rollback));
 
-switch (true) {
-  case fullPrice > 30000:
-    console.log("Даем скидку в 10%");
-    break;
-  case fullPrice > 15000 && fullPrice <= 30000:
-    console.log("Даем скидку в 5%");
-    break;
-  case fullPrice <= 15000 && fullPrice > 0:
-    console.log("Скидка не предусмотрена");
-    break;
-  default:
-    console.log("Что то пошло не так");
-}
+const getRollbackMessage = function () {
+  switch (true) {
+    case fullPrice > 30000:
+      return "Даем скидку в 10%";
+    case fullPrice > 15000 && fullPrice <= 30000:
+      return "Даем скидку в 5%";
+    case fullPrice <= 15000 && fullPrice > 0:
+      return "Скидка не предусмотрена";
+    default:
+      return "Что то пошло не так";
+  }
+};
 
-console.log(title); // проверка на правильность
-console.log(`Адаптив на сайте: ${adaptive}.`);
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
-console.log(screens.length);
-console.log(`Стоимость верстки экранов: ${screenPrice} долларов.`);
-console.log(`Стоимость разработки сайта: ${fullPrice} долларов.`);
+showTypeOf(title);
+showTypeOf(fullPrice);
+showTypeOf(adaptive);
 console.log(screens.toLowerCase().split(", "));
-console.log(fullPrice * (rollback / 100));
+console.log(getRollbackMessage());
 console.log(servicePercentPrice);
-
-alert(
-  `Название проекта: ${title}. Тип экранов: ${screens}. Стоимость работ: ${fullPrice} долларов.`
-);
