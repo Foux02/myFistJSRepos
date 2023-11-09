@@ -13,15 +13,12 @@ let service1 = prompt("Какой дополнительный тип услуг
 let servicePrice1 = prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice2 = prompt("Сколько это будет стоить?");
-let fullPrice, servicePercentPrice, allServicePrices;
 
-// function expression
+let fullPrice, servicePercentPrice, allServicePrices;
 
 const getAllServicePrices = function (funServicePrice1, funServicePrice2) {
   return funServicePrice1 + funServicePrice2;
 };
-
-// function declaration -
 
 function getFullPrice(funScreenPrice, funAllServicePrices) {
   return funScreenPrice + funAllServicePrices;
@@ -37,6 +34,19 @@ const getServicePercentPrices = function (funFullPrice, funRollback) {
 
 const showTypeOf = function (varTypeOf) {
   console.log(varTypeOf, typeof varTypeOf);
+};
+
+const getRollbackMessage = function () {
+  switch (true) {
+    case fullPrice > 30000:
+      return "Даем скидку в 10%";
+    case fullPrice > 15000 && fullPrice <= 30000:
+      return "Даем скидку в 5%";
+    case fullPrice <= 15000 && fullPrice > 0:
+      return "Скидка не предусмотрена";
+    default:
+      return "Что то пошло не так";
+  }
 };
 
 if (title[0] !== " ") {
@@ -72,19 +82,6 @@ if (servicePrice2 == null) {
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 fullPrice = getFullPrice(screenPrice, allServicePrices);
 servicePercentPrice = Math.ceil(getServicePercentPrices(fullPrice, rollback));
-
-const getRollbackMessage = function () {
-  switch (true) {
-    case fullPrice > 30000:
-      return "Даем скидку в 10%";
-    case fullPrice > 15000 && fullPrice <= 30000:
-      return "Даем скидку в 5%";
-    case fullPrice <= 15000 && fullPrice > 0:
-      return "Скидка не предусмотрена";
-    default:
-      return "Что то пошло не так";
-  }
-};
 
 showTypeOf(title);
 showTypeOf(fullPrice);
