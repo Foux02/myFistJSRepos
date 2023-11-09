@@ -27,9 +27,15 @@ function getFullPrice(funScreenPrice, funAllServicePrices) {
   return funScreenPrice + funAllServicePrices;
 }
 
-const getTitle = function (funTitle) {
-  return funTitle[0].toUpperCase() + funTitle.slice(1);
+const getTitle = function (funTitle, symbolEmpty1, symbolEmpty2) {
+  return funTitle[symbolEmpty1].toUpperCase() + funTitle.slice(symbolEmpty2);
 };
+
+if (title[0] == " ") {
+  title = getTitle(title, 1, 2);
+} else {
+  title = getTitle(title, 0, 1);
+}
 
 if (screenPrice == null) {
   screenPrice = 0;
@@ -55,7 +61,6 @@ if (servicePrice2 == null) {
   servicePrice2 = parseFloat(servicePrice2.replace(",", `.`));
 }
 
-title = getTitle(title);
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 fullPrice = getFullPrice(screenPrice, allServicePrices);
 servicePercentPrice = Math.ceil(fullPrice - rollback);
@@ -74,7 +79,7 @@ switch (true) {
     console.log("Что то пошло не так");
 }
 
-console.log(title[0]); // проверка на пустоту
+console.log(title); // проверка на правильность
 console.log(`Адаптив на сайте: ${adaptive}.`);
 console.log(typeof title);
 console.log(typeof fullPrice);
