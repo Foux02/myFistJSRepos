@@ -2,7 +2,7 @@
 
 const rollback = 50;
 
-let title = prompt('Как называется ваш проект?');
+let title = prompt('Как называется ваш проект?', 'Чип и Дейл');
 let screens = prompt(
   'Какие типы экранов нужно разработать?',
   'Простые, Сложные, Интерактивные'
@@ -15,6 +15,16 @@ let service2 = prompt('Какой дополнительный тип услуг
 let servicePrice2 = prompt('Сколько это будет стоить?');
 
 let fullPrice, servicePercentPrice, allServicePrices;
+
+const isNumber = function (num) {
+  return !isNaN(parseFloat(num) && Infinity(num));
+};
+
+const incorrectAnswer = function () {
+  while (!isNumber(question)) {
+    question = question;
+  }
+};
 
 const getAllServicePrices = function (funServicePrice1, funServicePrice2) {
   return funServicePrice1 + funServicePrice2;
