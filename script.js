@@ -1,18 +1,18 @@
-"use strict";
+'use strict';
 
 const rollback = 50;
 
-let title = prompt("Как называется ваш проект?");
+let title = prompt('Как называется ваш проект?');
 let screens = prompt(
-  "Какие типы экранов нужно разработать?",
-  "Простые, Сложные, Интерактивные"
+  'Какие типы экранов нужно разработать?',
+  'Простые, Сложные, Интерактивные'
 );
-let screenPrice = prompt("Сколько будет стоить данная работа?");
-let adaptive = confirm("Нужен ли адаптив на сайте?");
-let service1 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice1 = prompt("Сколько это будет стоить?");
-let service2 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice2 = prompt("Сколько это будет стоить?");
+let screenPrice = prompt('Сколько будет стоить данная работа?');
+let adaptive = confirm('Нужен ли адаптив на сайте?');
+let service1 = prompt('Какой дополнительный тип услуги нужен?');
+let servicePrice1 = prompt('Сколько это будет стоить?');
+let service2 = prompt('Какой дополнительный тип услуги нужен?');
+let servicePrice2 = prompt('Сколько это будет стоить?');
 
 let fullPrice, servicePercentPrice, allServicePrices;
 
@@ -39,17 +39,17 @@ const showTypeOf = function (varTypeOf) {
 const getRollbackMessage = function () {
   switch (true) {
     case fullPrice > 30000:
-      return "Даем скидку в 10%";
+      return 'Даем скидку в 10%';
     case fullPrice > 15000 && fullPrice <= 30000:
-      return "Даем скидку в 5%";
+      return 'Даем скидку в 5%';
     case fullPrice <= 15000 && fullPrice > 0:
-      return "Скидка не предусмотрена";
+      return 'Скидка не предусмотрена';
     default:
-      return "Что то пошло не так";
+      return 'Что то пошло не так';
   }
 };
 
-if (title[0] !== " ") {
+if (title[0] !== ' ') {
   title = getTitle(title, 0, 1);
 } else {
   title = getTitle(title, 1, 2);
@@ -57,26 +57,26 @@ if (title[0] !== " ") {
 
 if (screenPrice == null) {
   screenPrice = 0;
-} else if (screenPrice == "") {
+} else if (screenPrice == '') {
   screenPrice = 0;
 } else {
-  screenPrice = parseFloat(screenPrice.replace(",", `.`));
+  screenPrice = parseFloat(screenPrice.replace(',', `.`));
 }
 
 if (servicePrice1 == null) {
   servicePrice1 = 0;
-} else if (servicePrice1 == "") {
+} else if (servicePrice1 == '') {
   servicePrice1 = 0;
 } else {
-  servicePrice1 = parseFloat(servicePrice1.replace(",", `.`));
+  servicePrice1 = parseFloat(servicePrice1.replace(',', `.`));
 }
 
 if (servicePrice2 == null) {
   servicePrice2 = 0;
-} else if (servicePrice2 == "") {
+} else if (servicePrice2 == '') {
   servicePrice2 = 0;
 } else {
-  servicePrice2 = parseFloat(servicePrice2.replace(",", `.`));
+  servicePrice2 = parseFloat(servicePrice2.replace(',', `.`));
 }
 
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
@@ -86,6 +86,6 @@ servicePercentPrice = Math.ceil(getServicePercentPrices(fullPrice, rollback));
 showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
-console.log(screens.toLowerCase().split(", "));
+console.log(screens.toLowerCase().split(', '));
 console.log(getRollbackMessage());
 console.log(servicePercentPrice);
