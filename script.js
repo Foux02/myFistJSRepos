@@ -2,27 +2,43 @@
 
 const rollback = 50;
 
-let title = prompt('Как называется ваш проект?', 'Чип и Дейл');
-let screens = prompt(
-  'Какие типы экранов нужно разработать?',
-  'Простые, Сложные, Интерактивные'
-);
-let screenPrice = prompt('Сколько будет стоить данная работа?');
-let adaptive = confirm('Нужен ли адаптив на сайте?');
-let service1 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice1 = prompt('Сколько это будет стоить?');
-let service2 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice2 = prompt('Сколько это будет стоить?');
+let title;
+let screens;
+let screenPrice;
+let adaptive;
+let service1;
+let servicePrice1;
+let service2;
+let servicePrice2;
 
 let fullPrice, servicePercentPrice, allServicePrices;
 
 const isNumber = function (num) {
-  return !isNaN(parseFloat(num) && Infinity(num));
+  return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
-const incorrectAnswer = function () {
-  while (!isNumber(question)) {
-    question = question;
+const asking = function () {
+  title = prompt('Как называется ваш проект?', 'Чип и Дейл');
+  screens = prompt(
+    'Какие типы экранов нужно разработать?',
+    'Простые, Сложные, Интерактивные'
+  );
+
+  do {
+    screenPrice = prompt('Сколько будет стоить данная работа?');
+  } while (!isNumber(screenPrice));
+
+  adaptive = confirm('Нужен ли адаптив на сайте?');
+  service1 = prompt('Какой дополнительный тип услуги нужен?');
+
+  while (!isNumber(servicePrice1)) {
+    servicePrice1 = prompt('Сколько это будет стоить?');
+  }
+
+  service2 = prompt('Какой дополнительный тип услуги нужен?');
+
+  while (!isNumber(servicePrice2)) {
+    servicePrice2 = prompt('Сколько это будет стоить?');
   }
 };
 
@@ -59,38 +75,16 @@ const getRollbackMessage = function () {
   }
 };
 
+asking();
+
 if (title[0] !== ' ') {
   title = getTitle(title, 0, 1);
 } else {
   title = getTitle(title, 1, 2);
 }
 
-if (screenPrice == null) {
-  screenPrice = 0;
-} else if (screenPrice == '') {
-  screenPrice = 0;
-} else {
-  screenPrice = parseFloat(screenPrice.replace(',', `.`));
-}
-
-if (servicePrice1 == null) {
-  servicePrice1 = 0;
-} else if (servicePrice1 == '') {
-  servicePrice1 = 0;
-} else {
-  servicePrice1 = parseFloat(servicePrice1.replace(',', `.`));
-}
-
-if (servicePrice2 == null) {
-  servicePrice2 = 0;
-} else if (servicePrice2 == '') {
-  servicePrice2 = 0;
-} else {
-  servicePrice2 = parseFloat(servicePrice2.replace(',', `.`));
-}
-
-allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
-fullPrice = getFullPrice(screenPrice, allServicePrices);
+allServicePrices = getAllServicePrices(~~servicePrice1, ~~servicePrice2);
+fullPrice = getFullPrice(~~screenPrice, allServicePrices);
 servicePercentPrice = Math.ceil(getServicePercentPrices(fullPrice, rollback));
 
 showTypeOf(title);
