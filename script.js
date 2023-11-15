@@ -26,18 +26,18 @@ const asking = function () {
 
   do {
     screenPrice = prompt('Сколько будет стоить данная работа?');
-  } while (!isNumber(screenPrice));
+  } while (!isNumber(screenPrice) || screenPrice == null);
 
   adaptive = confirm('Нужен ли адаптив на сайте?');
   service1 = prompt('Какой дополнительный тип услуги нужен?');
 
-  while (!isNumber(servicePrice1)) {
+  while (!isNumber(servicePrice1) || servicePrice1 == null) {
     servicePrice1 = prompt('Сколько это будет стоить?');
   }
 
   service2 = prompt('Какой дополнительный тип услуги нужен?');
 
-  while (!isNumber(servicePrice2)) {
+  while (!isNumber(servicePrice2) || servicePrice2 == null) {
     servicePrice2 = prompt('Сколько это будет стоить?');
   }
 };
@@ -83,8 +83,14 @@ if (title[0] !== ' ') {
   title = getTitle(title, 1, 2);
 }
 
-allServicePrices = getAllServicePrices(~~servicePrice1, ~~servicePrice2);
-fullPrice = getFullPrice(~~screenPrice, allServicePrices);
+allServicePrices = getAllServicePrices(
+  parseFloat(servicePrice1.replaceAll(' ', '')),
+  parseFloat(servicePrice2.replaceAll(' ', ''))
+);
+fullPrice = getFullPrice(
+  parseFloat(screenPrice.replaceAll(' ', '')),
+  allServicePrices
+);
 servicePercentPrice = Math.ceil(getServicePercentPrices(fullPrice, rollback));
 
 showTypeOf(title);
@@ -93,3 +99,7 @@ showTypeOf(adaptive);
 console.log(screens.toLowerCase().split(', '));
 console.log(getRollbackMessage());
 console.log(servicePercentPrice);
+
+console.log(parseFloat(screenPrice.replaceAll(' ', '')));
+console.log(parseFloat(servicePrice1.replaceAll(' ', '')));
+console.log(parseFloat(servicePrice2.replaceAll(' ', '')));
