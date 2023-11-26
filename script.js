@@ -70,9 +70,7 @@ const appData = {
         price = prompt('Сколько это будет стоить?');
       } while (!appData.isNumber(price) || price === null);
 
-      appData.services[name] = +price;
-      appData.services.name[i] = i;
-      // Object.assign(appData.services[name], (appData.services[i] = i));
+      appData.services[`${name}__${i}`] = +price;
     }
   },
 
