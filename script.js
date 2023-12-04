@@ -81,7 +81,6 @@ const appData = {
     appData.addScreens();
     appData.addServices();
     appData.addPrices();
-    appData.changeRollback();
     appData.showResult();
 
     appData.logger();
@@ -135,8 +134,16 @@ const appData = {
   },
 
   addScreenBlock: function () {
-    const CloneScreen = screenAll[0].cloneNode(true);
-    screenAll[screenAll.length - 1].after(CloneScreen);
+    screenAll = document.querySelectorAll('.screen');
+    const cloneScreen = screenAll[screenAll.length - 1].cloneNode(true);
+
+    const inputCloneScreen = cloneScreen.querySelector('input[type=text]');
+    const selectCloneScreen = cloneScreen.querySelector('select');
+
+    inputCloneScreen.value = '';
+    selectCloneScreen.value = '';
+
+    screenAll[screenAll.length - 1].after(cloneScreen);
   },
 
   addPrices: function () {
