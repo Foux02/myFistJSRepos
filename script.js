@@ -40,8 +40,6 @@ const appData = {
   isError: false,
 
   init: function () {
-    console.log('function');
-
     this.addTitle();
 
     handlerBtnStart.addEventListener('click', appData.checkStart);
@@ -53,8 +51,6 @@ const appData = {
   },
 
   checkStart: function () {
-    console.log('checkStart');
-
     screenAll = document.querySelectorAll('.screen');
 
     screenAll.forEach(function (screen) {
@@ -66,7 +62,6 @@ const appData = {
         alert('Не проставленно количество');
         appData.isError = true;
       } else if (selectName === 'Тип экранов') {
-        console.log(select.selectedIndex);
         appData.isError = true;
         alert('Не заполнен тип экранов');
       } else {
@@ -86,8 +81,6 @@ const appData = {
   },
 
   resetForm: function () {
-    console.log('Сброс');
-
     appData.screens = [];
     appData.countScreensAll = 0;
     appData.screenPrice = 0;
@@ -156,8 +149,6 @@ const appData = {
   },
 
   changeRollback: function () {
-    console.log('changeRollback');
-
     rangeValue.textContent = `${event.target.value}%`;
     document.rollback = event.target.value;
     appData.rollback = +document.rollback;
@@ -173,8 +164,6 @@ const appData = {
   },
 
   showResult: function () {
-    console.log('showResult');
-
     total.value = this.screenPrice;
     totalCount.value = this.countScreensAll;
     totalCountOther.value =
@@ -184,8 +173,6 @@ const appData = {
   },
 
   addScreens: function () {
-    console.log('addScreens');
-
     screenAll = document.querySelectorAll('.screen');
     screenAll.forEach(function (screen, index) {
       const select = screen.querySelector('select');
@@ -202,8 +189,6 @@ const appData = {
   },
 
   addServices: function () {
-    console.log('addServices');
-
     otherItemsPercent.forEach(function (item) {
       const check = item.querySelector('input[type=checkbox]');
       const label = item.querySelector('label');
@@ -228,7 +213,6 @@ const appData = {
   },
 
   addScreenBlock: function () {
-    console.log('addScreenBlock');
     screenAll = document.querySelectorAll('.screen');
     const cloneScreen = screenAll[screenAll.length - 1].cloneNode(true);
 
@@ -242,7 +226,6 @@ const appData = {
   },
 
   addPrices: function () {
-    console.log('addPrices');
     this.screenPrice = this.screens.reduce(function (result, num) {
       return result + num.price;
     }, 0);
