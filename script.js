@@ -1,9 +1,12 @@
 'use strict';
 
+//const form = document.querySelector('.main');
+
 const title = document.getElementsByTagName('h1')[0];
 const screenBtn = document.querySelector('.screen-btn');
 const otherItemsPercent = document.querySelectorAll('.other-items.percent');
 const otherItemsNumber = document.querySelectorAll('.other-items.number');
+const summative = document.querySelectorAll('.main-total__item');
 
 const inputTypeRange = document.querySelector('.rollback input[type=range]');
 const rangeValue = document.querySelector('.rollback .range-value');
@@ -42,6 +45,8 @@ const appData = {
     this.addTitle();
 
     handlerBtnStart.addEventListener('click', appData.checkStart);
+    handlerBtnResert.addEventListener('click', appData.resetForm);
+
     screenBtn.addEventListener('click', this.addScreenBlock);
 
     inputTypeRange.addEventListener('input', this.changeRollback);
@@ -61,15 +66,89 @@ const appData = {
         alert('Не проставленно количество');
         appData.isError = true;
       } else if (selectName === 'Тип экранов') {
+        console.log(select.selectedIndex);
         appData.isError = true;
         alert('Не заполнен тип экранов');
       } else {
+        appData.isError = false;
       }
     });
 
     if (appData.isError === false) {
+      inputTypeRange.disabled = true;
+      screenBtn.disabled = true;
+
+      handlerBtnStart.style.display = 'none';
+      handlerBtnResert.style.display = 'inline-block';
+
       appData.start();
     }
+  },
+
+  resetForm: function () {
+    console.log('Сброс');
+
+    appData.screens = [];
+    appData.countScreensAll = 0;
+    appData.screenPrice = 0;
+    appData.adaptive = true;
+    appData.rollback = 0;
+    appData.servicePricesPercent = 0;
+    appData.servicePricesNumber = 0;
+    appData.fullPrice = 0;
+    appData.servicePercentPrice = 0;
+    appData.servicesPercent = {};
+    appData.servicesNumber = {};
+
+    screenAll = document.querySelectorAll('.screen');
+
+    screenAll.forEach(function (screen) {
+      screenAll = document.querySelectorAll('.screen');
+      const select = screen.querySelector('select');
+      const input = screen.querySelector('input');
+      const selectName = select.options[select.selectedIndex].textContent;
+
+      if (screenAll.length > 1) {
+        screen.remove();
+      } else {
+        select.value = '';
+        input.value = '';
+      }
+    });
+
+    otherItemsPercent.forEach(function (item) {
+      const check = item.querySelector('input[type=checkbox]');
+
+      if (check.checked) {
+        check.checked = false;
+      }
+
+      check.disabled = false;
+    });
+
+    otherItemsNumber.forEach(function (item) {
+      const check = item.querySelector('input[type=checkbox]');
+
+      if (check.checked) {
+        check.checked = false;
+      }
+
+      check.disabled = false;
+    });
+
+    summative.forEach(function (item) {
+      const input = item.querySelector('input');
+      input.value = 0;
+    });
+
+    inputTypeRange.value = 0;
+    rangeValue.textContent = `0%`;
+
+    inputTypeRange.disabled = false;
+    screenBtn.disabled = false;
+
+    handlerBtnStart.style.display = 'inline-block';
+    handlerBtnResert.style.display = 'none';
   },
 
   addTitle: function () {
@@ -133,6 +212,7 @@ const appData = {
       if (check.checked) {
         appData.servicesPercent[label.textContent] = +input.value;
       }
+      check.disabled = true;
     });
 
     otherItemsNumber.forEach(function (item) {
@@ -143,6 +223,7 @@ const appData = {
       if (check.checked) {
         appData.servicesNumber[label.textContent] = +input.value;
       }
+      check.disabled = true;
     });
   },
 
